@@ -1,239 +1,158 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HobiKnows - 웹사이트</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-Hype Trade News & Tikita</title>
+  <!-- 마크다운 변환 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+      --text-main: #1a1d20;
+      --text-sub: #6c757d;
+      --accent-blue: #0066cc;
+      --border-color: #e9ecef;
+    }
 
-        /* Navigation Bar */
-        header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #0f172a;
-            text-decoration: none;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #475569;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover {
-            color: #2563eb;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; }
 
-        /* Main Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2.5rem 1.5rem;
-        }
+    /* Header & Navigation */
+    header { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 15px 5%; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.4rem; font-weight: 800; color: var(--text-main); text-decoration: none; }
+    .search-bar input { padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 20px; width: 280px; outline: none; }
 
-        /* Hero & Search Area */
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .hero h1 {
-            font-size: 2.25rem;
-            color: #0f172a;
-            margin-bottom: 0.75rem;
-        }
-        .hero p {
-            color: #64748b;
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .search-box input {
-            width: 100%;
-            padding: 0.75rem 1.25rem;
-            border-radius: 9999px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.95rem;
-            outline: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: border-color 0.2s;
-        }
-        .search-box input:focus {
-            border-color: #2563eb;
-        }
+    /* Main Container */
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+    .section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
+    .section-title span { font-size: 0.8rem; background: #e7f1ff; color: var(--accent-blue); padding: 3px 8px; border-radius: 4px; }
 
-        /* Cards Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .card-img {
-            width: 100%;
-            height: 180px;
-            background-color: #e2e8f0;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 1.25rem;
-        }
-        .card-tag {
-            display: inline-block;
-            background-color: #eff6ff;
-            color: #2563eb;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-        }
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-        .card-desc {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .card-meta {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            display: flex;
-            justify-content: space-between;
-        }
+    /* Layout Sections */
+    .section-block { background: var(--card-bg); border-radius: 12px; padding: 24px; margin-bottom: 30px; border: 1px solid var(--border-color); }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: #94a3b8;
-            font-size: 0.875rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 3rem;
-        }
-    </style>
+    /* Hot Topic List */
+    .hot-topic-list { list-style: none; }
+    .hot-topic-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+    .hot-topic-item:last-child { border-bottom: none; }
+    .hot-topic-rank { font-weight: bold; width: 30px; color: var(--accent-blue); }
+
+    /* GitHub Posts Grid (최신 포스팅 카드 영역) */
+    .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .post-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; transition: transform 0.2s; }
+    .post-card:hover { transform: translateY(-3px); }
+    .post-card h1, .post-card h2 { font-size: 1.1rem; margin-bottom: 10px; }
+    .post-card p { font-size: 0.9rem; color: var(--text-sub); line-height: 1.4; }
+    .post-card img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
+
+    /* Feed List */
+    .feed-item { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">HobiKnows</a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <div class="container">
-        <section class="hero">
-            <h1>지식과 경험을 공유하는 공간</h1>
-            <p>다양한 주제의 포스트와 이야기를 확인해보세요.</p>
-            <div class="search-box">
-                <input type="text" placeholder="검색어를 입력하세요...">
-            </div>
-        </section>
-
-        <section class="grid-container">
-            <article class="card">
-                <img src="https://via.placeholder.com/400x200" alt="포스트 이미지" class="card-img">
-                <div class="card-content">
-                    <span class="card-tag">개발 / IT</span>
-                    <h2 class="card-title">웹사이트 제작 첫 걸음 시작하기</h2>
-                    <p class="card-desc">GitHub Pages를 활용해 나만의 멋진 블로그나 웹사이트를 만드는 기본 가이드입니다.</p>
-                    <div class="card-meta">
-                        <span>2026-09-05</span>
-                        <span>조회수 120</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <img src="https://via.placeholder.com/400x200" alt="포스트 이미지" class="card-img">
-                <div class="card-content">
-                    <span class="card-tag">디자인</span>
-                    <h2 class="card-title">심플하고 깔끔한 UI 레이아웃 구성법</h2>
-                    <p class="card-desc">사용자 경험을 높이는 가독성 좋은 카드 스타일 레이아웃 설계 팁을 소개합니다.</p>
-                    <div class="card-meta">
-                        <span>2026-09-04</span>
-                        <span>조회수 85</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <img src="https://via.placeholder.com/400x200" alt="포스트 이미지" class="card-img">
-                <div class="card-content">
-                    <span class="card-tag">일상</span>
-                    <h2 class="card-title">개인 블로그 운영일지</h2>
-                    <p class="card-desc">새로운 도메인을 연결하고 블로그를 구축해나가는 과정 정리.</p>
-                    <div class="card-meta">
-                        <span>2026-09-01</span>
-                        <span>조회수 210</span>
-                    </div>
-                </div>
-            </article>
-        </section>
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo">K-Hype Trade News</a>
+    <div class="search-bar">
+      <input type="text" placeholder="Trade & Tikita Search...">
     </div>
+  </header>
 
-    <footer>
-        © 2026 HobiKnows. All rights reserved.
-    </footer>
+  <div class="container">
 
+    <!-- 1. TOP SECTION: Live Hot Topics -->
+    <section class="section-block">
+      <div class="section-title">
+        TRENDING GLOBAL TRADE & TIKITA TOPICS
+        <span>SEO OPTIMIZED</span>
+      </div>
+      <ul class="hot-topic-list">
+        <li class="hot-topic-item">
+          <div><span class="hot-topic-rank">1.</span> <strong>GLOBAL TIKITA APPAREL TRENDS 2027:</strong> Deep dive into emerging textile patterns.</div>
+          <span>🔥 High</span>
+        </li>
+        <li class="hot-topic-item">
+          <div><span class="hot-topic-rank">2.</span> <strong>TRADE PARTNERSHIP ANNOUNCED:</strong> New agreement with Southeast Asia signed.</div>
+          <span>📈 Rising</span>
+        </li>
+        <li class="hot-topic-item">
+          <div><span class="hot-topic-rank">3.</span> <strong>PERSONAL MY TRADE LOGS:</strong> Navigating new container shipping challenges this month.</div>
+          <span>💬 Active</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 2. MIDDLE SECTION: GitHub Posts (Hot Topic + Tikita + Trade Logs 자동 연동) -->
+    <section class="section-block">
+      <div class="section-title">
+        FEATURED ARTICLES & TIKITA COLLECTIONS
+        <span>GITHUB LIVE FEED</span>
+      </div>
+      
+      <!-- GitHub의 /posts/ 폴더 내 .md 파일이 카드로 자동 생성되어 들어오는 공간 -->
+      <div id="github-posts-container" class="posts-grid">
+        <p style="color: var(--text-sub);">Loading posts from GitHub repository...</p>
+      </div>
+    </section>
+
+    <!-- 3. BOTTOM SECTION: Trade Community & Activity Log -->
+    <section class="section-block">
+      <div class="section-title">COMMUNITY & TRADE LOG FEED</div>
+      <div class="feed-item">
+        <strong>Logistics Update:</strong> Port of Singapore automation is a game-changer. Delays down by 25%.
+      </div>
+      <div class="feed-item">
+        <strong>Tikita Artwork:</strong> Exclusive patterns for upcoming seasons are now cataloged.
+      </div>
+    </section>
+
+  </div>
+
+  <!-- JavaScript: GitHub API 연동 -->
+  <script>
+    // 💡 본인의 GitHub 계정과 레포지토리 이름으로 변경하세요!
+    const GITHUB_USER = "YOUR_GITHUB_USERNAME"; 
+    const REPO_NAME = "YOUR_REPO_NAME";
+    const POSTS_FOLDER = "posts";
+
+    async function loadGitHubPosts() {
+      const container = document.getElementById("github-posts-container");
+
+      try {
+        // GitHub API로 /posts 폴더 내 파일 검색
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${POSTS_FOLDER}`);
+        const files = await response.json();
+
+        if (!Array.isArray(files) || files.length === 0) {
+          container.innerHTML = "<p>No posts found in /posts folder.</p>";
+          return;
+        }
+
+        container.innerHTML = ""; // 로딩 문구 제거
+
+        // 마크다운(.md) 파일만 파싱하여 카드 배치
+        const mdFiles = files.filter(file => file.name.endsWith('.md'));
+
+        for (const file of mdFiles) {
+          const contentRes = await fetch(file.download_url);
+          const markdownText = await contentRes.text();
+
+          const card = document.createElement("div");
+          card.className = "post-card";
+          card.innerHTML = marked.parse(markdownText); // 마크다운 -> HTML 변환
+
+          container.appendChild(card);
+        }
+      } catch (error) {
+        console.error("Error loading GitHub posts:", error);
+        container.innerHTML = "<p>Connect your GitHub repository to display auto-generated posts here.</p>";
+      }
+    }
+
+    // 페이지 로딩 시 실행
+    loadGitHubPosts();
+  </script>
 </body>
 </html>
