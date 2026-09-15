@@ -19,15 +19,39 @@
       </div>
     </div>
 
+    <!-- 드롭다운 메뉴 적용 -->
     <nav class="nav">
       <a href="#" class="active">HOME</a>
-      <a href="#insights">INSIGHTS⌄</a>
-      <a href="#stories">STORIES⌄</a>
+      
+      <div class="dropdown">
+        <a href="#insights" class="dropdown-toggle">INSIGHTS ⌄</a>
+        <ul class="dropdown-menu">
+          <li><a href="highlight.html">Highlight</a></li>
+          <li><a href="trade-insight.html">Trade Insight</a></li>
+          <li><a href="ai-lab.html">AI Lab</a></li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <a href="#stories" class="dropdown-toggle">STORIES ⌄</a>
+        <ul class="dropdown-menu">
+          <li><a href="tikita.html">TIKITA</a></li>
+          <li><a href="visual-novel.html">Visual Novel</a></li>
+          <li><a href="web-novel.html">Web Novel</a></li>
+        </ul>
+      </div>
+
       <a href="#about">ABOUT</a>
     </nav>
 
     <div class="header-actions">
-      <span class="lang">🌐 EN⌄</span>
+      <div class="dropdown">
+        <span class="lang dropdown-toggle">🌐 EN ⌄</span>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="?lang=en">English</a></li>
+          <li><a href="?lang=ko">한국어</a></li>
+        </ul>
+      </div>
     </div>
   </header>
 
@@ -119,7 +143,7 @@
         </p>
 
         <div class="category-grid">
-          <a href="#" class="category-card">
+          <a href="tikita.html" class="category-card">
             <div class="category-image"></div>
             <div class="category-body">
               <div class="category-icon">★</div>
@@ -129,7 +153,7 @@
             </div>
           </a>
 
-          <a href="#" class="category-card">
+          <a href="visual-novel.html" class="category-card">
             <div class="category-image"></div>
             <div class="category-body">
               <div class="category-icon">▣</div>
@@ -139,7 +163,7 @@
             </div>
           </a>
 
-          <a href="#" class="category-card">
+          <a href="web-novel.html" class="category-card">
             <div class="category-image"></div>
             <div class="category-body">
               <div class="category-icon">♜</div>
