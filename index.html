@@ -1,239 +1,301 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HobiKnows - 웹사이트</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-        }
-
-        /* Navigation Bar */
-        header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #0f172a;
-            text-decoration: none;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #475569;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover {
-            color: #2563eb;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2.5rem 1.5rem;
-        }
-
-        /* Hero & Search Area */
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .hero h1 {
-            font-size: 2.25rem;
-            color: #0f172a;
-            margin-bottom: 0.75rem;
-        }
-        .hero p {
-            color: #64748b;
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .search-box input {
-            width: 100%;
-            padding: 0.75rem 1.25rem;
-            border-radius: 9999px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.95rem;
-            outline: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: border-color 0.2s;
-        }
-        .search-box input:focus {
-            border-color: #2563eb;
-        }
-
-        /* Cards Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .card-img {
-            width: 100%;
-            height: 180px;
-            background-color: #e2e8f0;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 1.25rem;
-        }
-        .card-tag {
-            display: inline-block;
-            background-color: #eff6ff;
-            color: #2563eb;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-        }
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-        .card-desc {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .card-meta {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: #94a3b8;
-            font-size: 0.875rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 3rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOBIKNOWS — Know the world. Imagine new ones.</title>
+  <meta name="description" content="Global insights, trade intelligence, AI technology and immersive stories." />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">HobiKnows</a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <div class="container">
-        <section class="hero">
-            <h1>지식과 경험을 공유하는 공간</h1>
-            <p>다양한 주제의 포스트와 이야기를 확인해보세요.</p>
-            <div class="search-box">
-                <input type="text" placeholder="검색어를 입력하세요...">
-            </div>
-        </section>
-
-        <section class="grid-container">
-            <article class="card">
-                <img src="https://via.placeholder.com/400x200" alt="포스트 이미지" class="card-img">
-                <div class="card-content">
-                    <span class="card-tag">개발 / IT</span>
-                    <h2 class="card-title">웹사이트 제작 첫 걸음 시작하기</h2>
-                    <p class="card-desc">GitHub Pages를 활용해 나만의 멋진 블로그나 웹사이트를 만드는 기본 가이드입니다.</p>
-                    <div class="card-meta">
-                        <span>2026-09-05</span>
-                        <span>조회수 120</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <img src="https://via.placeholder.com/400x200" alt="포스트 이미지" class="card-img">
-                <div class="card-content">
-                    <span class="card-tag">디자인</span>
-                    <h2 class="card-title">심플하고 깔끔한 UI 레이아웃 구성법</h2>
-                    <p class="card-desc">사용자 경험을 높이는 가독성 좋은 카드 스타일 레이아웃 설계 팁을 소개합니다.</p>
-                    <div class="card-meta">
-                        <span>2026-09-04</span>
-                        <span>조회수 85</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <img src="https://via.placeholder.com/400x200" alt="포스트 이미지" class="card-img">
-                <div class="card-content">
-                    <span class="card-tag">일상</span>
-                    <h2 class="card-title">개인 블로그 운영일지</h2>
-                    <p class="card-desc">새로운 도메인을 연결하고 블로그를 구축해나가는 과정 정리.</p>
-                    <div class="card-meta">
-                        <span>2026-09-01</span>
-                        <span>조회수 210</span>
-                    </div>
-                </div>
-            </article>
-        </section>
+<div class="page">
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div>
+        <a href="#" class="brand">HOBIKNOWS<span class="dot">.</span></a>
+        <div class="tagline">Know the world. Imagine new ones.</div>
+      </div>
     </div>
 
-    <footer>
-        © 2026 HobiKnows. All rights reserved.
-    </footer>
+    <nav class="nav">
+      <a href="#" class="active">HOME</a>
+      <a href="#insights">INSIGHTS⌄</a>
+      <a href="#stories">STORIES⌄</a>
+      <a href="#about">ABOUT</a>
+    </nav>
 
+    <div class="header-actions">
+      <span class="lang">🌐 EN⌄</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">IDEAS TODAY<br>A BRIGHTER TOMORROW</div>
+      <h1>HOBIKNOWS<span class="dot">.</span></h1>
+      <div class="hero-sub">Know the world. Imagine new ones.</div>
+      <p class="hero-desc">
+        Global insights, AI technology, trade intelligence, and inspiring stories
+        for a smarter, more creative tomorrow.
+      </p>
+      <a class="primary-btn" href="#insights">Explore HOBIKNOWS <span>→</span></a>
+    </div>
+
+    <div class="hero-visual">
+      <div class="world-card"></div>
+      <div class="orb"></div>
+      <div class="books">
+        <div class="book">REAL INSIGHTS</div>
+        <div class="book">BOLDER IDEAS</div>
+        <div class="book">NEW WORLDS</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="content">
+
+    <section class="worlds-grid">
+      <div class="world-section insights" id="insights">
+        <div class="section-kicker"><span>01</span><span class="kicker-line"></span><span>REAL WORLD</span></div>
+        <div class="section-title-row">
+          <div>
+            <h2>INSIGHTS</h2>
+            <h3>Know the World</h3>
+          </div>
+          <a href="#" class="explore-link">Explore Insights&nbsp; →</a>
+        </div>
+        <p class="section-description">
+          더 넓은 세상을 이해하고, 더 나은 선택을 할 수 있도록.
+          글로벌 뉴스, 무역 데이터, AI 인사이트를 제공합니다.
+        </p>
+
+        <div class="category-grid">
+          <a href="highlight.html" class="category-card">
+            <div class="category-image"></div>
+            <div class="category-body">
+              <div class="category-icon">ϟ</div>
+              <div class="category-name">HIGHLIGHT</div>
+              <div class="category-copy">What’s happening in the world<br>지금, 세상의 주요 이슈</div>
+              <div class="round-arrow">→</div>
+            </div>
+          </a>
+
+          <a href="trade-insight.html" class="category-card">
+            <div class="category-image"></div>
+            <div class="category-body">
+              <div class="category-icon">◎</div>
+              <div class="category-name">TRADE INSIGHT</div>
+              <div class="category-copy">Data, regulations, and market trends<br>무역 데이터와 시장 분석</div>
+              <div class="round-arrow">→</div>
+            </div>
+          </a>
+
+          <a href="ai-lab.html" class="category-card">
+            <div class="category-image"></div>
+            <div class="category-body">
+              <div class="category-icon">⌘</div>
+              <div class="category-name">AI LAB</div>
+              <div class="category-copy">AI for business and global trade<br>비즈니스를 위한 AI</div>
+              <div class="round-arrow">→</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="world-section stories" id="stories">
+        <div class="section-kicker"><span>02</span><span class="kicker-line"></span><span>IMAGINARY WORLDS</span></div>
+        <div class="section-title-row">
+          <div>
+            <h2>STORIES</h2>
+            <h3>Imagine New Ones</h3>
+          </div>
+          <a href="#" class="explore-link">Explore Stories&nbsp; →</a>
+        </div>
+        <p class="section-description">
+          상상을 넘어, 또 다른 세계로.
+          AI가 만들어가는 새로운 이야기와 다양한 인터랙티브 콘텐츠를 만나보세요.
+        </p>
+
+        <div class="category-grid">
+          <a href="#" class="category-card">
+            <div class="category-image"></div>
+            <div class="category-body">
+              <div class="category-icon">★</div>
+              <div class="category-name">TIKITA</div>
+              <div class="category-copy">AI Novel & Story Platform<br>AI가 만들어가는 새로운 이야기</div>
+              <div class="round-arrow">→</div>
+            </div>
+          </a>
+
+          <a href="#" class="category-card">
+            <div class="category-image"></div>
+            <div class="category-body">
+              <div class="category-icon">▣</div>
+              <div class="category-name">VISUAL NOVEL</div>
+              <div class="category-copy">Interactive Story Experience<br>선택이 만들어가는 특별한 경험</div>
+              <div class="round-arrow">→</div>
+            </div>
+          </a>
+
+          <a href="#" class="category-card">
+            <div class="category-image"></div>
+            <div class="category-body">
+              <div class="category-icon">♜</div>
+              <div class="category-name">WEB NOVEL</div>
+              <div class="category-copy">Read Freely, Anywhere<br>언제 어디서나, 다양한 이야기</div>
+              <div class="round-arrow">→</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="latest-wrap">
+      <div class="latest-col insights-latest">
+        <div class="latest-head">
+          <h3>Latest Insights</h3>
+          <a href="#" class="view-all">View All&nbsp; →</a>
+        </div>
+        <div class="latest-grid">
+          <article class="article-card">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=700&q=80')"></div>
+            <div class="article-body">
+              <div class="article-meta"><span class="badge blue-badge">TRADE</span><span>Sep 8, 2026</span></div>
+              <h4>U.S. Tariff Changes and What They Mean for Global Trade</h4>
+              <p>What it means for supply chains, trade strategy and businesses.</p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80')"></div>
+            <div class="article-body">
+              <div class="article-meta"><span class="badge blue-badge">TECH</span><span>Sep 7, 2026</span></div>
+              <h4>Why AI Infrastructure Keeps Accelerating</h4>
+              <p>Key drivers behind the next wave of AI adoption.</p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=80')"></div>
+            <div class="article-body">
+              <div class="article-meta"><span class="badge blue-badge">GLOBAL</span><span>Sep 6, 2026</span></div>
+              <h4>Global Economy Enters a New Phase</h4>
+              <p>Trends, risks, and opportunities in a shifting world.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="latest-col stories-latest">
+        <div class="latest-head">
+          <h3>Latest Stories</h3>
+          <a href="#" class="view-all">View All&nbsp; →</a>
+        </div>
+        <div class="latest-grid">
+          <article class="article-card">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80')"></div>
+            <div class="article-body">
+              <div class="article-meta"><span class="badge pink-badge">TIKITA</span><span>Sep 7, 2026</span></div>
+              <h4>지도에 없는 섬에 표류 중입니다.</h4>
+              <p>“여기서, 우리는 다시 시작한다.”</p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=700&q=80')"></div>
+            <div class="article-body">
+              <div class="article-meta"><span class="badge pink-badge">VISUAL NOVEL</span><span>Sep 6, 2026</span></div>
+              <h4>The Last Summer</h4>
+              <p>“Some endings become new beginnings.”</p>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80')"></div>
+            <div class="article-body">
+              <div class="article-meta"><span class="badge pink-badge">WEB NOVEL</span><span>Sep 5, 2026</span></div>
+              <h4>너를 위한 세계</h4>
+              <p>“다른 차원에서도, 다시 너를.”</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="dynamic-posts">
+      <div class="dynamic-posts-head">
+        <h3>Latest from GitHub</h3>
+        <span class="status-pill">AUTO FEED</span>
+      </div>
+      <div id="github-posts-container">
+        <div class="github-card">
+          <p>GitHub 설정 후 <strong>/posts</strong> 폴더의 Markdown 파일이 자동으로 표시됩니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="value-strip">
+      <div class="value-item">
+        <div class="value-icon">◎</div>
+        <div><div class="value-title">Global Perspective</div><div class="value-desc">Insights from around the world</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">▥</div>
+        <div><div class="value-title">Data-Driven</div><div class="value-desc">Accurate data and deep analysis</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">☼</div>
+        <div><div class="value-title">AI-Powered</div><div class="value-desc">Smart tools for better decisions</div></div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">♧</div>
+        <div><div class="value-title">For Everyone</div><div class="value-desc">Professionals, businesses, and creators</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="about">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">HOBIKNOWS<span class="dot">.</span></div>
+        <div class="tagline">Know the world. Imagine new ones.</div>
+      </div>
+      <div>
+        <h5>INSIGHTS</h5>
+        <a href="highlight.html">Highlight</a><br>
+        <a href="trade-insight.html">Trade Insight</a><br>
+        <a href="ai-lab.html">AI Lab</a><br>
+      </div>
+      <div>
+        <h5>STORIES</h5>
+        <a href="tikita.html">TIKITA</a><br>
+        <a href="visual-novel.html">Visual Novel</a><br>
+        <a href="web-novel.html">Web Novel</a><br>
+      </div>
+      <div>
+        <h5>COMPANY</h5>
+        <a href="about.html">About Us</a><br>
+        <a href="contact.html">Contact</a><br>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <div>
+        <h5>Stay Updated</h5>
+        <p>Get the latest insights and stories.</p>
+        <div class="subscribe">
+          <input type="email" placeholder="Enter your email">
+          <button type="button">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 HOBIKNOWS. All rights reserved.</span>
+      <span>A Smarter World. A More Creative Tomorrow.</span>
+    </div>
+  </footer>
+</div>
+  <script src="script.js"></script>
 </body>
 </html>
