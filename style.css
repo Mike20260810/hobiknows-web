@@ -5448,3 +5448,119 @@
 }
 
 
+
+
+
+/* =========================================================
+   TIKITA — COVER GALLERY UPDATE
+   Paste at the very bottom of style.css
+   ========================================================= */
+
+.tikita-cover-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+.tikita-cover-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tikita-cover-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  background: #ece9e4;
+}
+
+.tikita-cover-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+
+.tikita-cover-card:hover .tikita-cover-image img {
+  transform: scale(1.025);
+}
+
+.tikita-cover-number {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(15,15,15,.72);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  backdrop-filter: blur(8px);
+}
+
+.tikita-cover-info {
+  padding: 18px 3px 0;
+}
+
+.tikita-cover-info > span {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  opacity: .48;
+}
+
+.tikita-cover-info h3 {
+  margin: 0;
+  font-size: clamp(20px, 1.8vw, 28px);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+
+.tikita-cover-info p {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.65;
+  opacity: .62;
+}
+
+@media (max-width: 1050px) {
+  .tikita-cover-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 42px 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .tikita-cover-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 12px;
+  }
+
+  .tikita-cover-image {
+    border-radius: 12px;
+  }
+
+  .tikita-cover-info {
+    padding-top: 12px;
+  }
+
+  .tikita-cover-info h3 {
+    font-size: 17px;
+  }
+
+  .tikita-cover-info p {
+    display: none;
+  }
+}
