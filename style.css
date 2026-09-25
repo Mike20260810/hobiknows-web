@@ -371,12 +371,12 @@
     .insights .category-card:nth-child(3) .category-image{
       background-image:url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=700&q=80");
     }
-.stories .category-card:nth-child(1) .category-image{
-  background-image:url("tikita-assets/tikita-title.png");
-  background-position:center;
-  background-size:cover;
-  filter:saturate(.8) contrast(1.05);
-}
+    .stories .category-card:nth-child(1) .category-image{
+      background-image:url("tikita-assets/tikita-title.png");
+      background-position:center;
+      background-size:cover;
+      filter:saturate(.8) contrast(1.05);
+    }
     .stories .category-card:nth-child(2) .category-image{
       background-image:url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80");
     }
