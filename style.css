@@ -374,6 +374,9 @@
     .stories .category-card:nth-child(1) .category-image{
       background-image:url("tikita-assets/tikita-title.png");
       background-position:center;
+        background-size:85% auto;
+        background-repeat:no-repeat;
+        background-color:#fff;
       background-size:cover;
       filter:saturate(.8) contrast(1.05);
     }
