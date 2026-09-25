@@ -377,7 +377,6 @@
         background-size:85% auto;
         background-repeat:no-repeat;
         background-color:#fff;
-      background-size:cover;
       filter:saturate(.8) contrast(1.05);
     }
     .stories .category-card:nth-child(2) .category-image{
