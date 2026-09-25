@@ -469,6 +469,7 @@
   overflow:hidden;
   min-height:250px;
   transition:.22s ease;
+    cursor:pointer;
 }
 
 .article-card:hover{
