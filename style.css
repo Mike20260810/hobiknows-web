@@ -596,14 +596,14 @@
       padding:30px 3vw 22px;
       margin-top:18px;
     }
-    .footer-grid{
-      max-width:1500px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1.4fr repeat(3,.8fr) 1.3fr;
-      gap:30px;
-      padding-bottom:28px;
-    }
+.footer-grid{
+  max-width:1500px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.4fr repeat(3,1fr);
+  gap:30px;
+  padding-bottom:28px;
+}
     .footer .brand{color:#fff}
     .footer .tagline{color:#afbdd0}
     .footer h5{font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin:0 0 10px}
