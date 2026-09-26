@@ -10,10 +10,22 @@ let pushing = false;
 
 function run(command) {
   return new Promise((resolve, reject) => {
-    exec(command, { cwd: ROOT }, (error, stdout, stderr) => {
-      if (error) return reject(error);
-      resolve(stdout || stderr);
-    });
+    exec(
+      command,
+      {
+        cwd: ROOT,
+        windowsHide: true,
+        maxBuffer: 1024 * 1024 * 10
+      },
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(stderr || stdout);
+          return reject(error);
+        }
+
+        resolve(stdout || stderr);
+      }
+    );
   });
 }
 
@@ -25,11 +37,13 @@ async function pushChanges() {
     const status = await run("git status --porcelain");
 
     if (!status.trim()) {
-      pushing = false;
       return;
     }
 
-    console.log("\n변경사항 발견 → GitHub 자동 업로드 시작");
+    console.log("\n변경사항 발견 → 자동 업데이트 시작");
+
+    // 1. GitHub
+    console.log("→ GitHub 업로드 중...");
 
     await run("git add -A");
 
@@ -39,9 +53,19 @@ async function pushChanges() {
     await run("git push origin main");
 
     console.log("✓ GitHub 업로드 완료");
-    console.log("✓ Firebase 자동배포가 이어서 실행됩니다.\n");
+
+    // 2. Firebase Hosting
+    console.log("→ Firebase Hosting 배포 중...");
+
+    const deployResult = await run(
+      "npx firebase-tools deploy --only hosting"
+    );
+
+    console.log(deployResult);
+    console.log("✓ Firebase Hosting 배포 완료\n");
+
   } catch (error) {
-    console.error("자동 업로드 실패:", error.message);
+    console.error("자동 업데이트 실패:", error.message);
   } finally {
     pushing = false;
   }
@@ -56,7 +80,7 @@ function schedulePush() {
 }
 
 console.log("HOBIKNOWS Auto Push 실행 중");
-console.log("파일 변경 후 15초가 지나면 자동으로 GitHub에 업로드합니다.");
+console.log("파일 변경 후 15초가 지나면 GitHub + Firebase Hosting에 자동 반영됩니다.");
 console.log("종료하려면 Ctrl+C\n");
 
 fs.watch(
@@ -67,6 +91,7 @@ fs.watch(
 
     const normalized = filename.replace(/\\/g, "/");
 
+    // 자동 생성 파일은 감시 제외
     if (
       normalized.startsWith(".git/") ||
       normalized.startsWith("node_modules/") ||
