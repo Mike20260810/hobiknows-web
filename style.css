@@ -473,7 +473,7 @@
       box-shadow:0 14px 28px rgba(28,46,72,.08);
     }
     .category-image{
-      height:116px;
+      height:150px;
       background:#dfe7f0 center/cover no-repeat;
     }
     .category-card:nth-child(1) .category-image{
@@ -592,7 +592,7 @@
 }
 
 .article-thumb{
-  height:128px;
+  height:160px;
   background:#dce5ef center/cover no-repeat;
   transition:transform .3s ease;
 }
