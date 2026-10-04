@@ -757,9 +757,6 @@
 
     @media(max-width:1100px){
       .nav{display:none}
-      .hero{grid-template-columns:1fr}
-      .hero-copy{padding-right:6vw}
-      .hero-visual{display:none}
       .worlds-grid,.latest-wrap{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1.3fr repeat(2,1fr)}
     }
