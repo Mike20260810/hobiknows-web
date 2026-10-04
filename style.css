@@ -6261,3 +6261,14 @@
   }
 
 }
+
+
+
+
+/* STORIES — WEB NOVEL CARD */
+.web-novel-card .category-image {
+  background-image: url("web-novel-assets/web-novel-main.png");
+  background-size: cover;
+  background-position: center 52%;
+  background-repeat: no-repeat;
+}
