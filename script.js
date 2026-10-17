@@ -62,3 +62,137 @@ function initDropdownMenus() {
 document.addEventListener("DOMContentLoaded", () => {
   initDropdownMenus();
 });
+
+
+
+
+
+
+
+
+/* =========================================================
+   Decap CMS Markdown Fetcher for Highlight Page
+   ========================================================= */
+
+// Front Matter 및 Markdown 파서
+function parseMarkdown(text) {
+  const frontMatterRegex = /^---\r?\n([\s+S]*?)\r?\n---\r?\n([\s\S]*)$/;
+  const match = frontMatterRegex.exec(text);
+
+  if (!match) return { meta: {}, body: text };
+
+  const rawMeta = match[1];
+  const body = match[2];
+  const meta = {};
+
+  rawMeta.split("\n").forEach((line) => {
+    const parts = line.split(":");
+    if (parts.length >= 2) {
+      const key = parts[0].trim();
+      let value = parts.slice(1).join(":").trim();
+      // 따옴표 제거
+      value = value.replace(/^["'](.*)["']$/, "$1");
+      meta[key] = value;
+    }
+  });
+
+  return { meta, body };
+}
+
+// GitHub API 또는 빌드된 파일 목록을 읽어오는 함수
+async function loadHighlightPosts() {
+  const leadContainer = document.querySelector(".lead-story");
+  const newsGridContainer = document.querySelector(".highlight-news-grid");
+
+  if (!leadContainer || !newsGridContainer) return;
+
+  try {
+    // 1. posts/highlight/ 내의 파일 목록 가져오기 (GitHub API 또는 static index)
+    // local/Vercel 환경에서 posts 목록을 가져옵니다.
+    const response = await fetch("https://api.github.com/repos/Mike20260810/hobiknows-web/contents/posts/highlight");
+    
+    if (!response.ok) {
+      console.log("No dynamic CMS posts found or API limit reached.");
+      return;
+    }
+
+    const files = await response.json();
+    const mdFiles = files.filter(file => file.name.endsWith(".md"));
+
+    if (mdFiles.length === 0) return;
+
+    // 2. 각 마크다운 파일의 내용 가져오기
+    const posts = await Promise.all(
+      mdFiles.map(async (file) => {
+        const res = await fetch(file.download_url);
+        const text = await res.text();
+        const { meta, body } = parseMarkdown(text);
+        return { ...meta, body, downloadUrl: file.download_url };
+      })
+    );
+
+    // 날짜 기준 내림차순 정렬 (최신순)
+    posts.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
+    // 3. Today's Lead Story (가장 최신글 1개) 렌더링
+    const lead = posts[0];
+    if (lead) {
+      const formattedDate = lead.date ? new Date(lead.date).toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }).toUpperCase() : "RECENT";
+      
+      leadContainer.innerHTML = `
+        <div class="lead-story-image" style="background-image: url('${lead.image || 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1600&q=85'}');">
+          <div class="lead-story-badge">TOP STORY</div>
+        </div>
+        <div class="lead-story-content">
+          <div class="story-meta">
+            ${lead.category || 'GLOBAL'} <span>·</span> ${formattedDate}
+          </div>
+          <h3>${lead.title}</h3>
+          <p>${lead.summary || lead.body.slice(0, 150) + '...'}</p>
+          <a href="#" class="read-story">Read Full Story <span>→</span></a>
+        </div>
+      `;
+    }
+
+    // 4. What Matters Today (그 다음 최신글들 렌더링)
+    if (posts.length > 1) {
+      const otherPosts = posts.slice(1, 4); // 최대 3개
+      newsGridContainer.innerHTML = otherPosts.map(post => {
+        return `
+          <article class="highlight-news-card">
+            <a href="#" class="highlight-news-image">
+              <img src="${post.image || 'https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=800&q=80'}" alt="${post.title}">
+            </a>
+            <div class="highlight-news-body">
+              <div class="news-category">${post.category || 'NEWS'}</div>
+              <h3>${post.title}</h3>
+              <p>${post.summary || post.body.slice(0, 100) + '...'}</p>
+              <div class="news-footer">
+                <span>3 min read</span>
+                <a href="#">→</a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+  } catch (error) {
+    console.error("Error loading CMS posts:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initDropdownMenus();
+  loadHighlightPosts(); // CMS 포스트 불러오기 실행
+});
+
+
+
+
+
+
+
+
+
+
