@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARTICLE — HOBIKNOWS</title>
+  <link rel="icon" type="image/png" href="/hobiknows-favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .article-container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .article-header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 30px;
+    }
+    .article-meta {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #0055ff;
+      margin-bottom: 12px;
+    }
+    .article-title {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #111;
+    }
+    .article-summary {
+      font-size: 1.15rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .article-hero-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    .article-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #222;
+    }
+    .article-body h2 {
+      margin-top: 40px;
+      margin-bottom: 16px;
+      font-size: 1.6rem;
+    }
+    .article-body h3 {
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+    .article-body ul, .article-body ol {
+      margin-bottom: 24px;
+      padding-left: 20px;
+    }
+    .article-body li {
+      margin-bottom: 8px;
+    }
+    .article-body a {
+      color: #0055ff;
+      text-decoration: underline;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { color: #000; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div>
+        <a href="index.html" class="brand">HOBIKNOWS<span class="dot">.</span></a>
+        <div class="tagline">Know the world. Imagine new ones.</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">HOME</a>
+      <a href="highlight.html">HIGHLIGHT</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+  </header>
+
+  <main class="article-container">
+    <a href="highlight.html" class="back-link">← Back to Highlight</a>
+    
+    <div id="article-content">
+      <p>Loading article...</p>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+function parseMarkdown(text) {
+  const frontMatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
+  const match = frontMatterRegex.exec(text);
+  if (!match) return { meta: {}, body: text };
+
+  const rawMeta = match[1];
+  const body = match[2];
+  const meta = {};
+
+  rawMeta.split("\n").forEach((line) => {
+    const parts = line.split(":");
+    if (parts.length >= 2) {
+      const key = parts[0].trim();
+      let value = parts.slice(1).join(":").trim();
+      value = value.replace(/^["'](.*)["']$/, "$1");
+      meta[key] = value;
+    }
+  });
+  return { meta, body };
+}
+
+async function renderArticle() {
+  const params = new URLSearchParams(window.location.search);
+  const path = params.get("path");
+  const container = document.getElementById("article-content");
+
+  if (!path) {
+    container.innerHTML = "<h2>Article not found.</h2>";
+    return;
+  }
+
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error("Failed to load markdown file");
+    const text = await res.text();
+    const { meta, body } = parseMarkdown(text);
+
+    const htmlBody = marked.parse(body);
+
+    container.innerHTML = `
+      <div class="article-header">
+        <div class="article-meta">${meta.category || 'NEWS'} · ${meta.date || ''}</div>
+        <h1 class="article-title">${meta.title || 'Untitled'}</h1>
+        ${meta.summary ? `<p class="article-summary">${meta.summary}</p>` : ''}
+      </div>
+      ${meta.image ? `<img src="${meta.image}" class="article-hero-img" alt="${meta.title}">` : ''}
+      <div class="article-body">
+        ${htmlBody}
+      </div>
+    `;
+  } catch (err) {
+    container.innerHTML = "<h2>Error loading article.</h2>";
+    console.error(err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", renderArticle);
+</script>
+</body>
+</html>
