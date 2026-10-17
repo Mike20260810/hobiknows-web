@@ -92,11 +92,16 @@
   </section>
 
 
-  <!-- MAIN -->
+
+  <!-- =========================
+       MAIN
+       ========================= -->
   <main class="highlight-main">
 
-    <!-- TODAY'S LEAD (동적 렌더링 영역) -->
+
+    <!-- TODAY'S LEAD -->
     <section class="highlight-section">
+
       <div class="highlight-section-head">
         <div>
           <div class="section-number">01</div>
@@ -105,14 +110,26 @@
         <p>The one issue that matters most today</p>
       </div>
 
-      <div id="lead-story-container">
-        <!-- JS로 CMS 최신 글이 여기에 삽입됩니다 -->
+      <!-- 요소를 스크립트가 찾을 수 있도록 감싸줍니다 -->
+      <div id="lead-story-wrapper">
+        <article class="lead-story">
+          <div class="lead-story-image" style="background-image: url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1600&q=85');">
+            <div class="lead-story-badge">TOP STORY</div>
+          </div>
+          <div class="lead-story-content">
+            <div class="story-meta">LOADING <span>·</span> PLEASE WAIT</div>
+            <h3>Loading latest stories...</h3>
+            <p>Fetching content from GitHub CMS...</p>
+          </div>
+        </article>
       </div>
+
     </section>
 
 
-    <!-- WHAT MATTERS TODAY (동적 렌더링 영역) -->
+    <!-- WHAT MATTERS TODAY -->
     <section class="highlight-section">
+
       <div class="highlight-section-head">
         <div>
           <div class="section-number">02</div>
@@ -121,10 +138,14 @@
         <p>Key issues shaping the world</p>
       </div>
 
-      <div class="highlight-news-grid" id="news-grid-container">
-        <!-- JS로 CMS 기사 목록이 여기에 삽입됩니다 -->
+      <div class="highlight-news-grid">
+        <!-- JS로 동적 추가됩니다 -->
       </div>
+
     </section>
+
+
+    
 
 
     <!-- QUICK BRIEF -->
