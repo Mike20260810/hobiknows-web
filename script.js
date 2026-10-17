@@ -183,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
 /* =========================================================
    Decap CMS Markdown Fetcher for Highlight Page
    ========================================================= */
@@ -213,7 +212,7 @@ function parseMarkdown(text) {
   return { meta, body };
 }
 
-// GitHub API 또는 빌드된 파일 목록을 읽어오는 함수
+// GitHub API를 통해 posts/highlight/ 목록을 읽어오는 함수
 async function loadHighlightPosts() {
   const leadContainer = document.querySelector(".lead-story");
   const newsGridContainer = document.querySelector(".highlight-news-grid");
@@ -221,8 +220,6 @@ async function loadHighlightPosts() {
   if (!leadContainer || !newsGridContainer) return;
 
   try {
-    // 1. posts/highlight/ 내의 파일 목록 가져오기 (GitHub API 또는 static index)
-    // local/Vercel 환경에서 posts 목록을 가져옵니다.
     const response = await fetch("https://api.github.com/repos/Mike20260810/hobiknows-web/contents/posts/highlight");
     
     if (!response.ok) {
@@ -235,7 +232,7 @@ async function loadHighlightPosts() {
 
     if (mdFiles.length === 0) return;
 
-    // 2. 각 마크다운 파일의 내용 가져오기
+    // 각 마크다운 파일의 내용 가져오기
     const posts = await Promise.all(
       mdFiles.map(async (file) => {
         const res = await fetch(file.download_url);
@@ -246,13 +243,19 @@ async function loadHighlightPosts() {
     );
 
     // 날짜 기준 내림차순 정렬 (최신순)
-    posts.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+    posts.sort((a, b) => {
+      const dateA = a.date ? new Date(a.date).getTime() : 0;
+      const dateB = b.date ? new Date(b.date).getTime() : 0;
+      return dateB - dateA;
+    });
 
-    // 3. Today's Lead Story (가장 최신글 1개) 렌더링
+    // 1. Today's Lead Story (가장 최신글 1개) 렌더링
     const lead = posts[0];
     if (lead) {
       const formattedDate = lead.date ? new Date(lead.date).toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }).toUpperCase() : "RECENT";
-      
+      // 상세 페이지 URL 생성 (path 파라미터 전달)
+      const detailUrl = `article.html?path=${encodeURIComponent(lead.downloadUrl)}`;
+
       leadContainer.innerHTML = `
         <div class="lead-story-image" style="background-image: url('${lead.image || 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1600&q=85'}');">
           <div class="lead-story-badge">TOP STORY</div>
@@ -261,29 +264,30 @@ async function loadHighlightPosts() {
           <div class="story-meta">
             ${lead.category || 'GLOBAL'} <span>·</span> ${formattedDate}
           </div>
-          <h3>${lead.title}</h3>
-          <p>${lead.summary || lead.body.slice(0, 150) + '...'}</p>
-          <a href="#" class="read-story">Read Full Story <span>→</span></a>
+          <h3><a href="${detailUrl}" style="color: inherit; text-decoration: none;">${lead.title || 'Untitled'}</a></h3>
+          <p>${lead.summary || (lead.body ? lead.body.slice(0, 150) + '...' : '')}</p>
+          <a href="${detailUrl}" class="read-story">Read Full Story <span>→</span></a>
         </div>
       `;
     }
 
-    // 4. What Matters Today (그 다음 최신글들 렌더링)
+    // 2. What Matters Today (그 다음 최신글들 렌더링)
     if (posts.length > 1) {
       const otherPosts = posts.slice(1, 4); // 최대 3개
       newsGridContainer.innerHTML = otherPosts.map(post => {
+        const cardDetailUrl = `article.html?path=${encodeURIComponent(post.downloadUrl)}`;
         return `
           <article class="highlight-news-card">
-            <a href="#" class="highlight-news-image">
+            <a href="${cardDetailUrl}" class="highlight-news-image">
               <img src="${post.image || 'https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=800&q=80'}" alt="${post.title}">
             </a>
             <div class="highlight-news-body">
               <div class="news-category">${post.category || 'NEWS'}</div>
-              <h3>${post.title}</h3>
-              <p>${post.summary || post.body.slice(0, 100) + '...'}</p>
+              <h3><a href="${cardDetailUrl}" style="color: inherit; text-decoration: none;">${post.title || 'Untitled'}</a></h3>
+              <p>${post.summary || (post.body ? post.body.slice(0, 100) + '...' : '')}</p>
               <div class="news-footer">
-                <span>3 min read</span>
-                <a href="#">→</a>
+                <span>${post.date ? new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "2-digit" }).toUpperCase() : 'RECENT'}</span>
+                <a href="${cardDetailUrl}">→</a>
               </div>
             </div>
           </article>
@@ -297,12 +301,11 @@ async function loadHighlightPosts() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initDropdownMenus();
-  loadHighlightPosts(); // CMS 포스트 불러오기 실행
+  if (typeof initDropdownMenus === "function") {
+    initDropdownMenus();
+  }
+  loadHighlightPosts();
 });
-
-
-
 
 
 
