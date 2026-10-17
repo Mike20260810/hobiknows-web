@@ -1,3 +1,5 @@
+local_backend: true # <--- 이 줄을 추가합니다.
+
 backend:
   name: github
   repo: Mike20260810/hobiknows-web # 본인의 GitHub 사용자명/저장소명 (예: hobi/hobiknows)
