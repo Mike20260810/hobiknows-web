@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: github_username/repository_name # 본인의 GitHub 사용자명/저장소명 (예: hobi/hobiknows)
+  repo: Mike20260810/hobiknows-web # 본인의 GitHub 사용자명/저장소명 (예: hobi/hobiknows)
   branch: main # 배포 메인 브랜치
   base_url: https://slinkyauth.vercel.app # 인증 게이트웨이 주소
   auth_endpoint: auth
