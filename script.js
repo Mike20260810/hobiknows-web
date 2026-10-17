@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Front Matter 및 Markdown 파서
 function parseMarkdown(text) {
-  const frontMatterRegex = /^---\r?\n([\s+S]*?)\r?\n---\r?\n([\s\S]*)$/;
+  const frontMatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
   const match = frontMatterRegex.exec(text);
 
   if (!match) return { meta: {}, body: text };
