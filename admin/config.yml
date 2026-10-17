@@ -1,9 +1,12 @@
 backend:
-  name: git-gateway
-  branch: main # Github 메인 브랜치 이름
+  name: github
+  repo: github_username/repository_name # 본인의 GitHub 사용자명/저장소명 (예: hobi/hobiknows)
+  branch: main # 배포 메인 브랜치
+  base_url: https://slinkyauth.vercel.app # 인증 게이트웨이 주소
+  auth_endpoint: auth
 
-media_folder: "assets/uploads" # 업로드한 이미지가 저장될 위치
-public_folder: "/assets/uploads" # HTML에서 인식할 이미지 경로
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
   - name: "highlight"
