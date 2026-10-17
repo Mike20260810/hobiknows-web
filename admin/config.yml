@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main # Github 메인 브랜치 이름
+
+media_folder: "assets/uploads" # 업로드한 이미지가 저장될 위치
+public_folder: "/assets/uploads" # HTML에서 인식할 이미지 경로
+
+collections:
+  - name: "highlight"
+    label: "Highlight News"
+    folder: "posts/highlight"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "select", options: ["GLOBAL ECONOMY", "TRADE", "AI", "WORLD", "MARKETS", "TECHNOLOGY", "POLICY"] }
+      - { label: "Cover Image", name: "image", widget: "image" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
