@@ -12,16 +12,14 @@
   >
 
   <link rel="icon" type="image/png" href="/hobiknows-favicon.png">
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="page">
 
-  <!-- =========================
-       HEADER
-       ========================= -->
+  <!-- HEADER -->
   <header class="site-header">
     <div class="brand-wrap">
       <div>
@@ -30,7 +28,6 @@
       </div>
     </div>
 
-    <!-- Dropdown navigation -->
     <nav class="nav">
       <a href="index.html">HOME</a>
       
@@ -67,11 +64,8 @@
   </header>
 
 
-  <!-- =========================
-       HIGHLIGHT HERO
-       ========================= -->
+  <!-- HIGHLIGHT HERO -->
   <section class="highlight-hero">
-
     <div class="highlight-hero-inner">
 
       <div class="highlight-kicker">
@@ -90,462 +84,173 @@
         A quick look at the changes that matter most in a complex news cycle.
       </p>
 
-      <div class="highlight-date">
-        SEPTEMBER 08 · 2026
+      <div class="highlight-date" id="current-highlight-date">
+        OCTOBER 17 · 2026
       </div>
 
     </div>
-
   </section>
 
 
-  <!-- =========================
-       MAIN
-       ========================= -->
+  <!-- MAIN -->
   <main class="highlight-main">
 
-
-    <!-- TODAY'S LEAD -->
+    <!-- TODAY'S LEAD (동적 렌더링 영역) -->
     <section class="highlight-section">
-
       <div class="highlight-section-head">
-
         <div>
           <div class="section-number">01</div>
           <h2>Today’s Highlight</h2>
         </div>
-
-        <p>
-          The one issue that matters most today
-        </p>
-
+        <p>The one issue that matters most today</p>
       </div>
 
-
-      <article class="lead-story">
-
-        <div
-          class="lead-story-image"
-          style="
-            background-image:
-            url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1600&q=85');
-          "
-        >
-
-          <div class="lead-story-badge">
-            TOP STORY
-          </div>
-
-        </div>
-
-
-        <div class="lead-story-content">
-
-          <div class="story-meta">
-            GLOBAL ECONOMY
-            <span>·</span>
-            SEP 08, 2026
-          </div>
-
-          <h3>
-            The Global Economy Is Entering
-            a New Phase
-          </h3>
-
-          <p>
-            Interest rates, supply chains, energy prices, and global policy shifts are moving at the same time. Here are the key changes shaping markets today.
-          </p>
-
-          <a href="#" class="read-story">
-            Read Full Story
-            <span>→</span>
-          </a>
-
-        </div>
-
-      </article>
-
+      <div id="lead-story-container">
+        <!-- JS로 CMS 최신 글이 여기에 삽입됩니다 -->
+      </div>
     </section>
 
 
-
-    <!-- WHAT MATTERS TODAY -->
+    <!-- WHAT MATTERS TODAY (동적 렌더링 영역) -->
     <section class="highlight-section">
-
       <div class="highlight-section-head">
-
         <div>
           <div class="section-number">02</div>
           <h2>What Matters Today</h2>
         </div>
-
-        <p>
-          Key issues shaping the world
-        </p>
-
+        <p>Key issues shaping the world</p>
       </div>
 
-
-      <div class="highlight-news-grid">
-
-
-        <!-- ARTICLE 1 -->
-        <article class="highlight-news-card">
-
-          <a href="#" class="highlight-news-image">
-
-            <img
-              src="https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=800&q=80"
-              alt="Global Trade"
-            >
-
-          </a>
-
-          <div class="highlight-news-body">
-
-            <div class="news-category">
-              TRADE
-            </div>
-
-            <h3>
-              Global Supply Chains
-              Face Another Turning Point
-            </h3>
-
-            <p>
-              New tariff policies and supply-chain restructuring are reshaping global business strategies.
-            </p>
-
-            <div class="news-footer">
-              <span>5 min read</span>
-              <a href="#">→</a>
-            </div>
-
-          </div>
-
-        </article>
-
-
-
-        <!-- ARTICLE 2 -->
-        <article class="highlight-news-card">
-
-          <a href="#" class="highlight-news-image">
-
-            <img
-              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
-              alt="Artificial Intelligence"
-            >
-
-          </a>
-
-          <div class="highlight-news-body">
-
-            <div class="news-category">
-              AI
-            </div>
-
-            <h3>
-              AI Infrastructure
-              Investment Keeps Accelerating
-            </h3>
-
-            <p>
-              Expanding investment in data centers and semiconductors is shaping the next phase of AI competition.
-            </p>
-
-            <div class="news-footer">
-              <span>4 min read</span>
-              <a href="#">→</a>
-            </div>
-
-          </div>
-
-        </article>
-
-
-
-        <!-- ARTICLE 3 -->
-        <article class="highlight-news-card">
-
-          <a href="#" class="highlight-news-image">
-
-            <img
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
-              alt="World News"
-            >
-
-          </a>
-
-          <div class="highlight-news-body">
-
-            <div class="news-category">
-              WORLD
-            </div>
-
-            <h3>
-              The Geopolitical Map
-              Continues to Shift
-            </h3>
-
-            <p>
-              Shifts in diplomatic and industrial policies across major economies are affecting the global trade and investment environment.
-            </p>
-
-            <div class="news-footer">
-              <span>6 min read</span>
-              <a href="#">→</a>
-            </div>
-
-          </div>
-
-        </article>
-
+      <div class="highlight-news-grid" id="news-grid-container">
+        <!-- JS로 CMS 기사 목록이 여기에 삽입됩니다 -->
       </div>
-
     </section>
-
 
 
     <!-- QUICK BRIEF -->
     <section class="highlight-section quick-brief-section">
-
       <div class="highlight-section-head">
-
         <div>
           <div class="section-number">03</div>
           <h2>Quick Brief</h2>
         </div>
-
-        <p>
-          Today’s news in 30 seconds
-        </p>
-
+        <p>Today’s news in 30 seconds</p>
       </div>
-
 
       <div class="quick-brief-list">
-
-
         <a href="#" class="quick-brief-item">
-
-          <div class="brief-number">
-            01
-          </div>
-
+          <div class="brief-number">01</div>
           <div class="brief-content">
-
-            <div class="brief-category">
-              MARKETS
-            </div>
-
-            <h3>
-              Global markets react to new economic data
-            </h3>
-
+            <div class="brief-category">MARKETS</div>
+            <h3>Global markets react to new economic data</h3>
           </div>
-
-          <div class="brief-arrow">
-            →
-          </div>
-
+          <div class="brief-arrow">→</div>
         </a>
 
-
-
         <a href="#" class="quick-brief-item">
-
-          <div class="brief-number">
-            02
-          </div>
-
+          <div class="brief-number">02</div>
           <div class="brief-content">
-
-            <div class="brief-category">
-              TECHNOLOGY
-            </div>
-
-            <h3>
-              AI competition expands beyond foundation models
-            </h3>
-
+            <div class="brief-category">TECHNOLOGY</div>
+            <h3>AI competition expands beyond foundation models</h3>
           </div>
-
-          <div class="brief-arrow">
-            →
-          </div>
-
+          <div class="brief-arrow">→</div>
         </a>
 
-
-
         <a href="#" class="quick-brief-item">
-
-          <div class="brief-number">
-            03
-          </div>
-
+          <div class="brief-number">03</div>
           <div class="brief-content">
-
-            <div class="brief-category">
-              TRADE
-            </div>
-
-            <h3>
-              Companies reassess global sourcing strategies
-            </h3>
-
+            <div class="brief-category">TRADE</div>
+            <h3>Companies reassess global sourcing strategies</h3>
           </div>
-
-          <div class="brief-arrow">
-            →
-          </div>
-
+          <div class="brief-arrow">→</div>
         </a>
 
-
-
         <a href="#" class="quick-brief-item">
-
-          <div class="brief-number">
-            04
-          </div>
-
+          <div class="brief-number">04</div>
           <div class="brief-content">
-
-            <div class="brief-category">
-              POLICY
-            </div>
-
-            <h3>
-              Governments introduce new industrial policies
-            </h3>
-
+            <div class="brief-category">POLICY</div>
+            <h3>Governments introduce new industrial policies</h3>
           </div>
-
-          <div class="brief-arrow">
-            →
-          </div>
-
+          <div class="brief-arrow">→</div>
         </a>
-
       </div>
-
     </section>
-
 
 
     <!-- EXPLORE -->
     <section class="highlight-explore">
-
       <div>
-
-        <span class="explore-kicker">
-          GO DEEPER
-        </span>
-
-        <h2>
-          Beyond the Headlines.
-        </h2>
-
-        <p>
-          Go beyond the news and explore what these changes mean for business and markets.
-        </p>
-
+        <span class="explore-kicker">GO DEEPER</span>
+        <h2>Beyond the Headlines.</h2>
+        <p>Go beyond the news and explore what these changes mean for business and markets.</p>
       </div>
-
 
       <div class="highlight-explore-links">
-
         <a href="trade-insight.html">
-          <span>
-            TRADE INSIGHT
-          </span>
-
-          <strong>
-            Explore trade and markets in depth
-          </strong>
-
-          <b>
-            →
-          </b>
+          <span>TRADE INSIGHT</span>
+          <strong>Explore trade and markets in depth</strong>
+          <b>→</b>
         </a>
-
-
         <a href="ai-lab.html">
-          <span>
-            AI LAB
-          </span>
-
-          <strong>
-            Explore the changes driven by AI
-          </strong>
-
-          <b>
-            →
-          </b>
+          <span>AI LAB</span>
+          <strong>Explore the changes driven by AI</strong>
+          <b>→</b>
         </a>
-
       </div>
-
     </section>
 
   </main>
 
 
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">HOBIKNOWS<span class="dot">.</span></div>
+        <div class="tagline">Know the world. Imagine new ones.</div>
+      </div>
 
-  <!-- =========================
-       FOOTER
-       ========================= -->
+      <div>
+        <h5>INSIGHTS</h5>
+        <a href="highlight.html">Highlight</a><br>
+        <a href="trade-insight.html">Trade Insight</a><br>
+        <a href="ai-lab.html">AI Lab</a>
+      </div>
 
-<footer class="footer">
-  <div class="footer-grid">
-    <div>
-      <div class="brand">HOBIKNOWS<span class="dot">.</span></div>
-      <div class="tagline">Know the world. Imagine new ones.</div>
-    </div>
+      <div>
+        <h5>STORIES</h5>
+        <a href="tikita.html">TIKITA</a><br>
+        <a href="visual-novel.html">Visual Novel</a><br>
+        <a href="web-novel.html">Web Novel</a>
+      </div>
 
-    <div>
-      <h5>INSIGHTS</h5>
-      <a href="highlight.html">Highlight</a><br>
-      <a href="trade-insight.html">Trade Insight</a><br>
-      <a href="ai-lab.html">AI Lab</a>
-    </div>
+      <div>
+        <h5>COMPANY</h5>
+        <a href="about.html">About Us</a><br>
+        <a href="contact.html">Contact</a><br>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
 
-    <div>
-      <h5>STORIES</h5>
-      <a href="tikita.html">TIKITA</a><br>
-      <a href="visual-novel.html">Visual Novel</a><br>
-      <a href="web-novel.html">Web Novel</a>
-    </div>
-
-    <div>
-      <h5>COMPANY</h5>
-      <a href="about.html">About Us</a><br>
-      <a href="contact.html">Contact</a><br>
-      <a href="privacy.html">Privacy Policy</a>
-    </div>
-
-    <div>
-      <h5>Stay Updated</h5>
-      <p>Get the latest insights and stories.</p>
-      <div class="subscribe">
-        <input type="email" placeholder="Enter your email">
-        <button type="button">→</button>
+      <div>
+        <h5>Stay Updated</h5>
+        <p>Get the latest insights and stories.</p>
+        <div class="subscribe">
+          <input type="email" placeholder="Enter your email">
+          <button type="button">→</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <span>© 2026 HOBIKNOWS. All rights reserved.</span>
-    <span>A Smarter World. A More Creative Tomorrow.</span>
-  </div>
-</footer>
-
+    <div class="footer-bottom">
+      <span>© 2026 HOBIKNOWS. All rights reserved.</span>
+      <span>A Smarter World. A More Creative Tomorrow.</span>
+    </div>
+  </footer>
 
 </div>
 
-
+<!-- 마크다운 변환 라이브러리 marked -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="script.js"></script>
 
 </body>
